@@ -1,0 +1,1 @@
+uvicorn app.main:app --app-dir=/svc-app/ --reload --workers=1 --host=0.0.0.0 --port=$PORT  --use-colors --loop=uvloop
