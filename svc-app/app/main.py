@@ -28,12 +28,6 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup():
-    conn_str = "mongodb://jira_user:jira_password@svc-mongo:27017/jira_backup"
-    client = motor.motor_asyncio.AsyncIOMotorClient(conn_str, serverSelectionTimeoutMS=5000)
-    try:
-        print(await client.server_info())
-    except Exception:
-        print("Unable to connect to the server.")
     return
 
 

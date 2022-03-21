@@ -1,4 +1,3 @@
-sudo chmod o+rw ./svc-mongo/mongo-init.js
 sudo find ./data-mongo/ | sudo xargs rm -rf
 docker rm -f $(docker ps -a -q)
 docker network rm $(docker network ls -q)

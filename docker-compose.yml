@@ -22,6 +22,7 @@ services:
       LOG_LEVEL: ${LOG_LEVEL}               # One of: debug, info, warning, error, critical
       MONGO_PORT: ${MONGO_PORT}
       MONGO_SERVER: ${MONGO_SERVER}
+      MONGO_DSN: "mongodb://${MONGO_INITDB_USER}:${MONGO_INITDB_PASSWORD}@${MONGO_SERVER}:${MONGO_PORT}/${MONGO_INITDB_DATABASE}"
     env_file:
       ./.env
     ports:
@@ -45,12 +46,14 @@ services:
       MONGO_LOG_DIR: /dev/null
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_USER: ${MONGO_INITDB_USER}
+      MONGO_INITDB_PASSWORD: ${MONGO_INITDB_PASSWORD}
       MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
     ports:
       - "27017:${MONGO_PORT}"
     volumes:
       - ./data-mongo:/data/db
-      - ./svc-mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./svc-mongo/initdb.d/:/docker-entrypoint-initdb.d/
     networks:
       - net-internal
 
